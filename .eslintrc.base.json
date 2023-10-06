@@ -1,7 +1,6 @@
 {
-  "root": true,
+  "extends": ["plugin:unicorn/recommended", "prettier"],
   "ignorePatterns": ["**/*"],
-  "plugins": ["@nx"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
@@ -9,27 +8,48 @@
         "@nx/enforce-module-boundaries": [
           "error",
           {
-            "enforceBuildableLibDependency": true,
             "allow": [],
             "depConstraints": [
               {
-                "sourceTag": "*",
-                "onlyDependOnLibsWithTags": ["*"]
+                "onlyDependOnLibsWithTags": ["*"],
+                "sourceTag": "*"
               }
-            ]
+            ],
+            "enforceBuildableLibDependency": true
           }
         ]
       }
     },
     {
-      "files": ["*.ts", "*.tsx"],
       "extends": ["plugin:@nx/typescript"],
+      "files": ["*.ts", "*.tsx"],
       "rules": {}
     },
     {
-      "files": ["*.js", "*.jsx"],
       "extends": ["plugin:@nx/javascript"],
+      "files": ["*.js", "*.jsx"],
       "rules": {}
     }
-  ]
+  ],
+  "plugins": ["@nx", "import", "simple-import-sort", "sort-keys-fix"],
+  "root": true,
+  "rules": {
+    "import/first": "error",
+    "import/newline-after-import": "error",
+    "import/no-duplicates": "error",
+    "simple-import-sort/exports": "error",
+    "simple-import-sort/imports": "error",
+    "sort-keys-fix/sort-keys-fix": "error",
+    "unicorn/filename-case": [
+      "error",
+      {
+        "cases": {
+          "camelCase": true,
+          "kebabCase": true,
+          "pascalCase": true
+        }
+      }
+    ],
+    "unicorn/prevent-abbreviations": "off"
+  }
 }

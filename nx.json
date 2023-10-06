@@ -1,55 +1,25 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "nx-cloud",
-      "options": {
-        "cacheableOperations": [
-          "build",
-          "lint",
-          "test",
-          "e2e"
-        ],
-        "accessToken": "MTJlNTEzMDMtMzUyMC00ZjUyLWIxMTYtNWZlMWE2ODkzMTc4fHJlYWQtd3JpdGU="
+  "defaultProject": "nx-react-vite-starter-standalone",
+  "generators": {
+    "@nx/react": {
+      "application": {
+        "babel": true,
+        "bundler": "vite",
+        "linter": "eslint",
+        "style": "css"
+      },
+      "component": {
+        "style": "css"
+      },
+      "library": {
+        "linter": "eslint",
+        "style": "css"
       }
     }
   },
-  "targetDefaults": {
-    "build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "inputs": [
-        "production",
-        "^production"
-      ]
-    },
-    "test": {
-      "inputs": [
-        "default",
-        "^production"
-      ]
-    },
-    "lint": {
-      "inputs": [
-        "default",
-        "{workspaceRoot}/.eslintrc.json",
-        "{workspaceRoot}/.eslintignore",
-        "{workspaceRoot}/eslint.config.js"
-      ]
-    },
-    "e2e": {
-      "inputs": [
-        "default",
-        "^production"
-      ]
-    }
-  },
   "namedInputs": {
-    "default": [
-      "{projectRoot}/**/*",
-      "sharedGlobals"
-    ],
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "production": [
       "default",
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
@@ -59,22 +29,33 @@
     ],
     "sharedGlobals": []
   },
-  "generators": {
-    "@nx/react": {
-      "application": {
-        "style": "css",
-        "linter": "eslint",
-        "bundler": "vite",
-        "babel": true
-      },
-      "component": {
-        "style": "css"
-      },
-      "library": {
-        "style": "css",
-        "linter": "eslint"
-      }
+  "targetDefaults": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
+    },
+    "e2e": {
+      "inputs": ["default", "^production"]
+    },
+    "lint": {
+      "inputs": [
+        "default",
+        "{workspaceRoot}/.eslintrc.json",
+        "{workspaceRoot}/.eslintignore",
+        "{workspaceRoot}/eslint.config.js"
+      ]
+    },
+    "test": {
+      "inputs": ["default", "^production"]
     }
   },
-  "defaultProject": "nx-react-vite-starter-standalone"
+  "tasksRunnerOptions": {
+    "default": {
+      "options": {
+        "accessToken": "MTJlNTEzMDMtMzUyMC00ZjUyLWIxMTYtNWZlMWE2ODkzMTc4fHJlYWQtd3JpdGU=",
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
+      },
+      "runner": "nx-cloud"
+    }
+  }
 }

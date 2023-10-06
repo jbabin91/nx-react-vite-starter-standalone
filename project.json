@@ -1,16 +1,11 @@
 {
-  "name": "nx-react-vite-starter-standalone",
   "$schema": "node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "./src",
+  "name": "nx-react-vite-starter-standalone",
   "projectType": "application",
+  "sourceRoot": "./src",
+  "tags": [],
   "targets": {
     "build": {
-      "executor": "@nx/vite:build",
-      "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "production",
-      "options": {
-        "outputPath": "dist/nx-react-vite-starter-standalone"
-      },
       "configurations": {
         "development": {
           "mode": "development"
@@ -18,14 +13,37 @@
         "production": {
           "mode": "production"
         }
+      },
+      "defaultConfiguration": "production",
+      "executor": "@nx/vite:build",
+      "options": {
+        "outputPath": "dist/nx-react-vite-starter-standalone"
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["./src/**/*.{ts,tsx,js,jsx}"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "preview": {
+      "configurations": {
+        "development": {
+          "buildTarget": "nx-react-vite-starter-standalone:build:development"
+        },
+        "production": {
+          "buildTarget": "nx-react-vite-starter-standalone:build:production"
+        }
+      },
+      "defaultConfiguration": "development",
+      "executor": "@nx/vite:preview-server",
+      "options": {
+        "buildTarget": "nx-react-vite-starter-standalone:build"
       }
     },
     "serve": {
-      "executor": "@nx/vite:dev-server",
-      "defaultConfiguration": "development",
-      "options": {
-        "buildTarget": "nx-react-vite-starter-standalone:build"
-      },
       "configurations": {
         "development": {
           "buildTarget": "nx-react-vite-starter-standalone:build:development",
@@ -35,38 +53,20 @@
           "buildTarget": "nx-react-vite-starter-standalone:build:production",
           "hmr": false
         }
-      }
-    },
-    "preview": {
-      "executor": "@nx/vite:preview-server",
+      },
       "defaultConfiguration": "development",
+      "executor": "@nx/vite:dev-server",
       "options": {
         "buildTarget": "nx-react-vite-starter-standalone:build"
-      },
-      "configurations": {
-        "development": {
-          "buildTarget": "nx-react-vite-starter-standalone:build:development"
-        },
-        "production": {
-          "buildTarget": "nx-react-vite-starter-standalone:build:production"
-        }
       }
     },
     "test": {
       "executor": "@nx/vite:test",
-      "outputs": ["{options.reportsDirectory}"],
       "options": {
         "passWithNoTests": true,
         "reportsDirectory": "coverage/nx-react-vite-starter-standalone"
-      }
-    },
-    "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["./src/**/*.{ts,tsx,js,jsx}"]
-      }
+      },
+      "outputs": ["{options.reportsDirectory}"]
     }
-  },
-  "tags": []
+  }
 }

@@ -2,6 +2,21 @@
   "ignorePatterns": ["!**/*"],
   "overrides": [
     {
+      "files": ["*.jsx", "*.tsx"],
+      "rules": {
+        "react/jsx-sort-props": [
+          "error",
+          {
+            "callbacksLast": true,
+            "ignoreCase": true,
+            "noSortAlphabetically": false,
+            "reservedFirst": true,
+            "shorthandFirst": true
+          }
+        ]
+      }
+    },
+    {
       "files": ["*.ts", "*.tsx"],
       "rules": {}
     },

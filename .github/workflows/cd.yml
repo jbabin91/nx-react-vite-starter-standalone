@@ -20,7 +20,5 @@ jobs:
         uses: ./.github/actions/pnpm-install
       - name: Build Webapp
         uses: ./.github/actions/build-webapp
-      - name: Deploy
-        uses: ./.github/actions/deploy
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload Artifact
+        uses: ./.github/actions/upload-artifacts

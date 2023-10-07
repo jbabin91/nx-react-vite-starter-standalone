@@ -1,0 +1,21 @@
+name: Run e2e Tests
+description: Run suite of e2e tests
+
+runs:
+  using: composite
+  steps:
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps
+      shell: bash
+
+    - name: Run e2e Tests
+      run: pnpm e2e
+      shell: bash
+
+    - name: Upload playwright artifacts
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: playwright-report
+        path: dist/.playwright/e2e/playwright-report/
+        retention-days: 30

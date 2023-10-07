@@ -1,0 +1,16 @@
+name: Apply Build Version
+description: Apply a build version to the webapp in develop
+
+runs:
+  using: composite
+  steps:
+    - name: Extract version from package.json
+      uses: sergeysova/jq-action@v2
+      id: get_version
+      with:
+        cmd: jq .version package.json -r
+
+    - name: Apply Build Version
+      if: ${{ github.head_ref == 'develop' || github.ref_name == 'develop' }}
+      run: npm version --git-tag-version false ${{ steps.get_version.outputs.value }}-develop.${{ github.run_number }}
+      shell: bash

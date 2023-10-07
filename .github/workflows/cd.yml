@@ -1,0 +1,26 @@
+name: CD (Continuous Deployment)
+
+on:
+  workflow_run:
+    workflows: ['CI (Continuous Integration)']
+    branches:
+      - main
+      - dev
+      - test
+  workflow_dispatch:
+
+jobs:
+  cd:
+    name: Continuous Deployment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+      - name: Install dependencies
+        uses: ./.github/actions/pnpm-install
+      - name: Build Webapp
+        uses: ./.github/actions/build-webapp
+      - name: Deploy
+        uses: ./.github/actions/deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

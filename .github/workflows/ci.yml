@@ -1,0 +1,23 @@
+name: CI (Continuous Integration)
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  ci:
+    name: Continuous Integration
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+      - name: Install dependencies
+        uses: ./.github/actions/pnpm-install
+      - name: Branch Checks
+        uses: ./.github/actions/branch-checks
+      - name: Build Webapp
+        uses: ./.github/actions/build-webapp
+      - name: Unit Tests
+        uses: ./.github/actions/unit-tests
+      - name: e2e Tests
+        uses: ./.github/actions/e2e-tests

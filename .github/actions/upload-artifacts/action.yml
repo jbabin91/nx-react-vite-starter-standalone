@@ -1,0 +1,11 @@
+name: Upload Build Artifacts
+description: Upload webapp build artifacts
+
+runs:
+  using: composite
+  steps:
+    - name: Upload Webapp Build artifacts
+      uses: actions/upload-artifacts@v3
+      with:
+        name: build-dir
+        path: dist/nx-react-vite-starter-standalone

@@ -16,7 +16,8 @@
     "start": "nx serve",
     "test": "nx test",
     "test:coverage": "nx test --coverage",
-    "test:ui": "nx test --watch --ui"
+    "test:ui": "nx test --watch --ui",
+    "typecheck": "tsc --noEmit"
   },
   "lint-staged": {
     "*": [

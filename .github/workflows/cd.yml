@@ -20,4 +20,4 @@ jobs:
       - name: Build Webapp
         uses: ./.github/actions/build-webapp
       - name: Upload Artifact
-        uses: ./.github/actions/upload-artifacts
+        uses: ./.github/actions/upload-artifact

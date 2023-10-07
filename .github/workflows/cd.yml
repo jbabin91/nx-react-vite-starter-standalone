@@ -1,7 +1,10 @@
-name: CD (Continuous Deployment)
+name: CD
 
 on:
-  push:
+  workflow_run:
+    workflows: ['CI']
+    types:
+      - completed
     branches:
       - main
       - dev
